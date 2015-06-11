@@ -1,10 +1,11 @@
 package com.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,9 +24,8 @@ public class SecretMember {
 	@Column(name="MEMBER_NAME", nullable = false)
 	private String memberName;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "SECRET_ID") 
-	private Set<Interest> interests;
+	@OneToMany(mappedBy = "secretMember",cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
+	private List<Interest> interests;
 	
 	@Column(name="SECRET_SANTA")
 	private String secretSanta;
@@ -45,11 +45,11 @@ public class SecretMember {
 		this.memberName = memberName;
 	}
 
-	public Set<Interest> getInterests() {
+	public List<Interest> getInterests() {
 		return interests;
 	}
 
-	public void setInterests(Set<Interest> interests) {
+	public void setInterests(List<Interest> interests) {
 		this.interests = interests;
 	}
 

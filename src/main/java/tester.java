@@ -1,10 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 
@@ -23,23 +19,19 @@ public class tester {
 		address.setPostalCode("1000");
 		address.setStreet("Poribagh");
 		
-		Set<Interest> interests = new HashSet<Interest>();
 		Interest interest1 = new Interest();
 		interest1.setDescription("books");
 		Interest interest2 = new Interest();
 		interest2.setDescription("movies");
 		
+		
 		SecretMember particapant1 = new SecretMember();
 		particapant1.setEmail("participant1@email.com");
 		particapant1.setMemberName("participant1");
-		particapant1.setInterests(interests);
 		
 		SecretMember particapant2 = new SecretMember();
 		particapant2.setEmail("participant2@email.com");
 		particapant2.setMemberName("participant2");
-		particapant2.setInterests(interests);
-		
-		
 		
 		SantaGroup santaGroup = new SantaGroup();
 		santaGroup.setGroupName("test group");
@@ -47,7 +39,7 @@ public class tester {
 		santaGroup.setGiftExchangeDate(new Date());
 		santaGroup.setCreationDate(new Date());
 		santaGroup.setPriceLimit(100);
-		santaGroup.setLocation(address);
+		santaGroup.setAddress(address);
 	
 		
 
@@ -62,10 +54,30 @@ public class tester {
 		
 		List<SecretMember> participants = new ArrayList<SecretMember>();
 		participants.add(particapant1);
-		participants.add( particapant2);
+		participants.add(particapant2);
 		
 		santaGroup.setParticipant(participants);
 		
+		em.flush();
+		
+		List<Interest> interests = new ArrayList<Interest>();
+
+		em.merge(santaGroup);
+		
+		interest1.setSecretMember(particapant1);
+		interest2.setSecretMember(particapant2);
+		
+		interests.add(interest1);
+		interests.add(interest2);
+		
+		particapant1.setInterests(interests);
+		
+		
+		particapant2.setInterests(interests);
+		
+	
+		em.flush();
+
 		em.merge(santaGroup);
 		
 		em.getTransaction().commit();

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Interest {
@@ -15,6 +17,10 @@ public class Interest {
     private int id;
 	
 	private String description;
+	
+	@ManyToOne(optional=false)
+    @JoinColumn(name="SECRET_ID", referencedColumnName="SECRET_ID")
+	private SecretMember secretMember;
 
 	public int getId() {
 		return id;
@@ -30,6 +36,14 @@ public class Interest {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public SecretMember getSecretMember() {
+		return secretMember;
+	}
+
+	public void setSecretMember(SecretMember secretMember) {
+		this.secretMember = secretMember;
 	}
 
 	@Override

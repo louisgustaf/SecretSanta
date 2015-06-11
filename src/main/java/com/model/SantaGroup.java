@@ -33,9 +33,8 @@ public class SantaGroup {
 	@Column(name="GIFT_EXCHANGE_DATE", nullable = false)
 	private Date giftExchangeDate;
 	
-	//@Column(name="LOCATION")
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional=false)
-	private Address location;
+	private Address address;
 	
 	@Column(name="PRICE_LIMIT", nullable = false)
 	private double priceLimit;
@@ -75,12 +74,12 @@ public class SantaGroup {
 		this.giftExchangeDate = giftExchangeDate;
 	}
 
-	public Address getLocation() {
-		return location;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setLocation(Address location) {
-		this.location = location;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public double getPriceLimit() {
@@ -122,7 +121,7 @@ public class SantaGroup {
 		result = prime * result
 				+ ((groupName == null) ? 0 : groupName.hashCode());
 		result = prime * result
-				+ ((location == null) ? 0 : location.hashCode());
+				+ ((address == null) ? 0 : address.hashCode());
 		result = prime * result
 				+ ((participant == null) ? 0 : participant.hashCode());
 		long temp;
@@ -160,10 +159,10 @@ public class SantaGroup {
 				return false;
 		} else if (!groupName.equals(other.groupName))
 			return false;
-		if (location == null) {
-			if (other.location != null)
+		if (address == null) {
+			if (other.address != null)
 				return false;
-		} else if (!location.equals(other.location))
+		} else if (!address.equals(other.address))
 			return false;
 		if (participant == null) {
 			if (other.participant != null)
