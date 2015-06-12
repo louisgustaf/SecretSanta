@@ -1,5 +1,7 @@
 package com.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,25 +10,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @Entity
-public class Interest {
+public class Interest  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    private Integer id;
 	
 	private String description;
 	
 	@ManyToOne(optional=false)
     @JoinColumn(name="SECRET_ID", referencedColumnName="SECRET_ID")
+	@JsonBackReference
 	private SecretMember secretMember;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

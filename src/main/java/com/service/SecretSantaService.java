@@ -6,6 +6,6 @@ public interface SecretSantaService {
 	
 	public void assignSecretMembers(SantaGroup santaGroup);
 	
-	public void sendEmailMessafe(SantaGroup santaGroup);
+	public void sendEmailMessage(String message);
 	
 }

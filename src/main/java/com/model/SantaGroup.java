@@ -1,5 +1,6 @@
 package com.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -13,13 +14,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 @Entity
-public class SantaGroup {
+public class SantaGroup implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @Column(name="GROUP_ID")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int GroupId;
+    private Integer GroupId;
 	
 	@Column(name="GROUP_NAME",nullable = false)
 	private String groupName;
@@ -33,13 +41,14 @@ public class SantaGroup {
 	@Column(name="GIFT_EXCHANGE_DATE", nullable = false)
 	private Date giftExchangeDate;
 	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional=false)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional=true)
 	private Address address;
 	
 	@Column(name="PRICE_LIMIT", nullable = false)
-	private double priceLimit;
+	private Double priceLimit;
 	
 	@OneToMany(mappedBy = "santaGroup",cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
+	@JsonManagedReference
 	private List<SecretMember> participant;
 
 	public String getGroupName() {
@@ -81,21 +90,20 @@ public class SantaGroup {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
-	public double getPriceLimit() {
+	
+	public Double getPriceLimit() {
 		return priceLimit;
 	}
 
-	public void setPriceLimit(double priceLimit) {
+	public void setPriceLimit(Double priceLimit) {
 		this.priceLimit = priceLimit;
 	}
 
-
-	public int getGroupId() {
+	public Integer getGroupId() {
 		return GroupId;
 	}
 
-	public void setGroupId(int groupId) {
+	public void setGroupId(Integer groupId) {
 		GroupId = groupId;
 	}
 

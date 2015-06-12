@@ -38,7 +38,7 @@ public class tester {
 		santaGroup.setDescription("bla bla bla bla bla");
 		santaGroup.setGiftExchangeDate(new Date());
 		santaGroup.setCreationDate(new Date());
-		santaGroup.setPriceLimit(100);
+		santaGroup.setPriceLimit(100d);
 		santaGroup.setAddress(address);
 	
 		
@@ -71,11 +71,9 @@ public class tester {
 		interests.add(interest2);
 		
 		particapant1.setInterests(interests);
-		
-		
+				
 		particapant2.setInterests(interests);
-		
-	
+			
 		em.flush();
 
 		em.merge(santaGroup);

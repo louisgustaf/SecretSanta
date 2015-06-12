@@ -1,5 +1,6 @@
 package com.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,18 +14,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 @Entity
-public class SecretMember {
+public class SecretMember implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @Column(name="SECRET_ID")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int SecretId;
+    private Integer SecretId;
 	
 	@Column(name="MEMBER_NAME", nullable = false)
 	private String memberName;
 	
 	@OneToMany(mappedBy = "secretMember",cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
+	@JsonManagedReference
 	private List<Interest> interests;
 	
 	@Column(name="SECRET_SANTA")
@@ -39,6 +49,7 @@ public class SecretMember {
 	
 	@ManyToOne(optional=false)
     @JoinColumn(name="GROUP_ID", referencedColumnName="GROUP_ID")
+	@JsonBackReference
 	private SantaGroup santaGroup;
 
 	public void setMemberName(String memberName) {
@@ -69,13 +80,11 @@ public class SecretMember {
 		this.email = email;
 	}
 
-	
-	
-	public int getSecretId() {
+	public Integer getSecretId() {
 		return SecretId;
 	}
 
-	public void setSecretId(int secretId) {
+	public void setSecretId(Integer secretId) {
 		SecretId = secretId;
 	}
 
