@@ -56,7 +56,7 @@ public class tester {
 		participants.add(particapant1);
 		participants.add(particapant2);
 		
-		santaGroup.setParticipant(participants);
+		santaGroup.setMembers(participants);
 		
 		em.flush();
 		

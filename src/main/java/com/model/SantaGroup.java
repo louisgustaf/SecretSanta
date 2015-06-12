@@ -49,7 +49,7 @@ public class SantaGroup implements Serializable{
 	
 	@OneToMany(mappedBy = "santaGroup",cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
 	@JsonManagedReference
-	private List<SecretMember> participant;
+	private List<SecretMember> members;
 
 	public String getGroupName() {
 		return groupName;
@@ -107,12 +107,12 @@ public class SantaGroup implements Serializable{
 		GroupId = groupId;
 	}
 
-	public List<SecretMember> getParticipant() {
-		return participant;
+	public List<SecretMember> getMembers() {
+		return members;
 	}
 
-	public void setParticipant(List<SecretMember> participant) {
-		this.participant = participant;
+	public void setMembers(List<SecretMember> members) {
+		this.members = members;
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class SantaGroup implements Serializable{
 		result = prime * result
 				+ ((address == null) ? 0 : address.hashCode());
 		result = prime * result
-				+ ((participant == null) ? 0 : participant.hashCode());
+				+ ((members == null) ? 0 : members.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(priceLimit);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -172,10 +172,10 @@ public class SantaGroup implements Serializable{
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (participant == null) {
-			if (other.participant != null)
+		if (members == null) {
+			if (other.members != null)
 				return false;
-		} else if (!participant.equals(other.participant))
+		} else if (!members.equals(other.members))
 			return false;
 		if (Double.doubleToLongBits(priceLimit) != Double
 				.doubleToLongBits(other.priceLimit))

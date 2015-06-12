@@ -35,7 +35,7 @@ public class SecretSantaServiceImpl implements SecretSantaService{
 	}
 	
 	private void assign(SantaGroup santaGroup){
-		List<SecretMember> secretMembers =  santaGroup.getParticipant();
+		List<SecretMember> secretMembers =  santaGroup.getMembers();
 		List<SecretMember> secretMembersCpy = new ArrayList<SecretMember>();
 		
 		Collections.copy(secretMembers, secretMembersCpy);

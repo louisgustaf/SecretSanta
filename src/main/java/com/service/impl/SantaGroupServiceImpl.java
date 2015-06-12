@@ -85,12 +85,12 @@ public class SantaGroupServiceImpl implements SantaGroupService {
 	public SecretMember addParticipantToGroup(@PathParam("id") int id, SecretMember secretMember) {
 		SantaGroup santaGroup = santaGroupDao.getSantaGroupById(id);
 		secretMember.setSantaGroup(santaGroup);
-		if(santaGroup.getParticipant() == null){
+		if(santaGroup.getMembers() == null){
 			List<SecretMember> secretMembers = new ArrayList<SecretMember>();
 			secretMembers.add(secretMember);
-			santaGroup.setParticipant(secretMembers);
+			santaGroup.setMembers(secretMembers);
 		}else{
-			santaGroup.getParticipant().add(secretMember);
+			santaGroup.getMembers().add(secretMember);
 		}
 		
 		

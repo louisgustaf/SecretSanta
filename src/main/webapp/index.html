@@ -1,12 +1,79 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="pt" ng-app="SecretSanta">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+	.ng-invalid.ng-dirty{
+		border-color: red;
+	}
+	
+	.ng-valid.ng-dirty{
+		border-color: green;
+	}
+	
+	</style>
+	
 </head>
-<body>
-
-<h2>Hello World!</h2>
-
+<body class="container">
+	<div ng-controller="SantaGroupController as santaGroupCtrl">
+		<form name="groupForm" ng-submit="addGroup()" novalidate="novalidate">
+			<div class="form-group">
+				<div>
+					Group Name:
+					<input class="form-control" type="text" ng-model="santaGroup.groupName" required>
+				</div>
+				<div>
+					Price Limit:
+					<input class="form-control" type="text" ng-model="santaGroup.priceLimit" required>
+				</div>
+				<div>
+					exchange date:
+					<input class="form-control" type="date" ng-model="santaGroup.giftExchangeDate" required>
+				</div>
+				<div>
+					Description:
+					<textarea class="form-control" rows="3" cols="50" ng-model="santaGroup.description"></textarea>
+				</div>
+				<div>
+					<input class="btn btn-default" type="submit" ng-show="true" value="Create Group">
+				</div>
+				<br>
+			</div>
+		</form>
+		<div class="product row" >
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="group in groups">
+					<h4>Group name: {{group.groupName}}</h4>
+					<h4>Price Limit: {{group.priceLimit | currency}}</h4>
+					<h4>exchange date: {{group.exchangeDate | date}}</h4>
+					<p>Description: {{group.description}}</p>
+					<form name="memberForm" class="form-inline" ng-controller="MemberController as memberController"
+						ng-submit="memberForm.$valid && memberController.addMember(group)" novalidate="novalidate">
+						<div class="form-group">
+							Name:<input class="form-control" type="text" ng-model="member.memberName" required>
+						</div>
+						<div class="form-group">
+							Email:<input class="form-control" type="email" ng-model="member.email" required>
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="submit" value="Add Member" ng-click="">
+						</div>
+					</form>
+					<br>
+					<ul class="list-group" ng-show="group.members.length">
+						<li class="list-group-item" ng-repeat="member in group.members">
+							<h5>Member Name: {{member.memberName}}
+							<em class="pull-right"></em>Email: {{member.email}}
+							<a href="javascript:void(0)">Set Interests</a></h5>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-resource.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
