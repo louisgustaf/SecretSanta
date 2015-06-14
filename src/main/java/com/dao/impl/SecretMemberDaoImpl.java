@@ -2,13 +2,17 @@ package com.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.dao.PersistenceManager;
 import com.dao.SecretMemberDao;
 import com.model.Interest;
 import com.model.SecretMember;
 
 public class SecretMemberDaoImpl extends BaseDaoImpl<SecretMember> implements SecretMemberDao {
+	
+	private EntityManager entityManager = PersistenceManager.INSTANCE.getEntityManager();
 
 	@Override
 	public SecretMember getSecretMemberById(int id) {

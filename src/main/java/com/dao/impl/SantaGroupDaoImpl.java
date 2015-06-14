@@ -2,13 +2,17 @@ package com.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.dao.PersistenceManager;
 import com.dao.SantaGroupDao;
 import com.model.SantaGroup;
 import com.model.SecretMember;
 
 public class SantaGroupDaoImpl extends BaseDaoImpl<SantaGroup> implements SantaGroupDao{
+	
+	private EntityManager entityManager = PersistenceManager.INSTANCE.getEntityManager();
 
 	@Override
 	public SantaGroup getSantaGroupById(int id) {
