@@ -55,5 +55,5 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			entityManager.close();
 		}
 	}
-
+	
 }
